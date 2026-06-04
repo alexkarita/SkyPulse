@@ -67,12 +67,12 @@
     </div>
 
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">💧 Humidity</div>    <div class="stat-value green"  id="humidity">—</div></div>
-      <div class="stat-card"><div class="stat-label">💨 Wind Speed</div>  <div class="stat-value"        id="windSpeed">—</div></div>
-      <div class="stat-card"><div class="stat-label">🌧 Precipitation</div><div class="stat-value yellow" id="precipitation">—</div></div>
-      <div class="stat-card"><div class="stat-label">🌬️ Wind Gust</div> <div class="stat-value"        id="cloudCover">—</div></div>
-      <div class="stat-card"><div class="stat-label">🧭 Wind Direction</div>  <div class="stat-value green"  id="visibility">—</div></div>
-      <div class="stat-card"><div class="stat-label">🔆 UV Index</div>    <div class="stat-value"        id="pressure">—</div></div>
+      <div class="stat-card"><div class="stat-label">💧 Humidity</div>      <div class="stat-value green"  id="humidity">—</div></div>
+      <div class="stat-card"><div class="stat-label">💨 Wind Speed</div>    <div class="stat-value"        id="windSpeed">—</div></div>
+      <div class="stat-card"><div class="stat-label">🌧 Precipitation</div> <div class="stat-value yellow" id="precipitation">—</div></div>
+      <div class="stat-card"><div class="stat-label">🌬️ Wind Gust</div>    <div class="stat-value"        id="cloudCover">—</div></div>
+      <div class="stat-card"><div class="stat-label">🧭 Wind Direction</div><div class="stat-value green"  id="visibility">—</div></div>
+      <div class="stat-card"><div class="stat-label">🔆 UV Index</div>      <div class="stat-value"        id="pressure">—</div></div>
     </div>
 
     <div class="insights-card">
@@ -93,10 +93,19 @@
   </div><!-- /.dashboard -->
 </div><!-- /.container -->
 
-<!-- JS loaded in dependency order -->
-<script src="config.js"></script>
+<!-- CONFIG inline so deployment works without a separate config file -->
+<script>
+  const CONFIG = {
+    API_KEY: 'wai_e528bd.16ccc56eb1d798e781c989a8ba621c4a3c976709211382bf',
+    API_BASE: 'https://api.weather-ai.co/v1',
+    GEO_BASE: 'https://geocoding-api.open-meteo.com/v1',
+    DEFAULT_DAYS: 7,
+    DEFAULT_UNITS: 'metric',
+    DEFAULT_LANG: 'en',
+  };
+</script>
 <script src="weather.js"></script>
-<script src="ui.js"></script>
-<script src="app.js"></script>
+<script src="Ui.js"></script>
+<script src="App.js"></script>
 </body>
 </html>
