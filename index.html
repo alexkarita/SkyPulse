@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkyPulse — Powered by WeatherAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo">Sky<span>Pulse</span></div>
+    <div class="badge">⚡ Powered by WeatherAI</div>
+  </header>
+
+  <div class="search-wrap">
+    <input class="search-input" id="cityInput" type="text"
+      placeholder="Enter city — e.g. Nairobi, London, Tokyo…"
+      autocomplete="off"/>
+    <button class="search-btn" id="searchBtn" onclick="getWeather()">Get Weather</button>
+  </div>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <div class="loader" id="loader">
+    Fetching weather data…
+    <div class="loader-bar"></div>
+  </div>
+
+  <!-- Welcome screen -->
+  <div class="welcome" id="welcome">
+    <div class="welcome-icon">🌤</div>
+    <h2>Real-Time Weather Intelligence</h2>
+    <p>Search any city to get live forecasts,<br>AI-powered insights, and 7-day outlooks.</p>
+    <div class="quick-cities">
+      <button class="city-btn" onclick="quickSearch('Nairobi')">Nairobi</button>
+      <button class="city-btn" onclick="quickSearch('London')">London</button>
+      <button class="city-btn" onclick="quickSearch('New York')">New York</button>
+      <button class="city-btn" onclick="quickSearch('Tokyo')">Tokyo</button>
+      <button class="city-btn" onclick="quickSearch('Lagos')">Lagos</button>
+      <button class="city-btn" onclick="quickSearch('Dubai')">Dubai</button>
+    </div>
+  </div>
+
+  <!-- Main dashboard -->
+  <div class="dashboard" id="dashboard">
+
+    <div class="hero-card">
+      <button class="back-btn" onclick="goBack()">← Back</button>
+      <div class="location-row">
+        <div>
+          <div class="location-name" id="cityName">—</div>
+          <div class="location-sub"  id="coordsLine">—</div>
+        </div>
+        <div class="timestamp" id="timestamp">—</div>
+      </div>
+      <div class="temp-row">
+        <div class="temp-main" id="tempValue">—<span class="temp-unit">°C</span></div>
+        <div class="temp-meta">
+          <div class="condition-tag" id="conditionTag">—</div>
+          <div class="feels-like"    id="feelsLike">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">💧 Humidity</div>    <div class="stat-value green"  id="humidity">—</div></div>
+      <div class="stat-card"><div class="stat-label">💨 Wind Speed</div>  <div class="stat-value"        id="windSpeed">—</div></div>
+      <div class="stat-card"><div class="stat-label">🌧 Precipitation</div><div class="stat-value yellow" id="precipitation">—</div></div>
+      <div class="stat-card"><div class="stat-label">🌬️ Wind Gust</div> <div class="stat-value"        id="cloudCover">—</div></div>
+      <div class="stat-card"><div class="stat-label">🧭 Wind Direction</div>  <div class="stat-value green"  id="visibility">—</div></div>
+      <div class="stat-card"><div class="stat-label">🔆 UV Index</div>    <div class="stat-value"        id="pressure">—</div></div>
+    </div>
+
+    <div class="insights-card">
+      <div class="section-header"><div class="dot"></div>AI Insight — WeatherAI</div>
+      <div class="insight-text" id="aiInsight">—</div>
+    </div>
+
+    <div class="forecast-card">
+      <div class="section-header"><div class="dot" style="background:var(--warn)"></div>7-Day Forecast</div>
+      <div class="forecast-row" id="forecastRow"></div>
+    </div>
+
+    <div class="api-credit">
+      Live data via <a href="https://weather-ai.co" target="_blank">WeatherAI API</a>
+      · Built by Alex Karita
+    </div>
+
+  </div><!-- /.dashboard -->
+</div><!-- /.container -->
+
+<!-- JS loaded in dependency order -->
+<script src="config.js"></script>
+<script src="weather.js"></script>
+<script src="ui.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

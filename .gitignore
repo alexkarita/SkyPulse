@@ -1,0 +1,8 @@
+# API key — NEVER commit the real config
+js/config.js
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
