@@ -14,15 +14,15 @@ const WeatherService = (() => {
   }
 
   async function fetchWeather({ lat, lon, days = CONFIG.DEFAULT_DAYS, ai = true, units = CONFIG.DEFAULT_UNITS, lang = CONFIG.DEFAULT_LANG }) {
-    const url = `${CONFIG.API_BASE}/weather?lat=${lat}&lon=${lon}&days=${days}&ai=${ai}&units=${units}&lang=${lang}`;
-    
-    const res = await fetch(url, {
+    const endpoint = `${CONFIG.API_BASE}/weather?lat=${lat}&lon=${lon}&days=${days}&ai=${ai}&units=${units}&lang=${lang}`;
+    const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(endpoint)}`;
+    const res = await fetch(proxy, {
       headers: { Authorization: `Bearer ${CONFIG.API_KEY}` },
     });
 
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
-      if (res.status === 401) throw new Error('API key invalid. Check your WeatherAI key in config.js.');
+      if (res.status === 401) throw new Error('API key invalid.');
       if (res.status === 429) throw new Error('Monthly API quota exceeded.');
       if (res.status === 403) throw new Error('Your plan does not include this feature.');
       throw new Error(err.message || `WeatherAI API error ${res.status}`);
@@ -30,7 +30,7 @@ const WeatherService = (() => {
 
     const data = await res.json();
 
-    // current is missing humidity/feels_like/gust — merge in hourly[0] which has them
+    // Merge hourly[0] into current for missing fields
     if (data.hourly && data.hourly.length > 0) {
       data.current = { ...data.hourly[0], ...data.current };
     }
