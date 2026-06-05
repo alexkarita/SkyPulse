@@ -14,11 +14,8 @@ const WeatherService = (() => {
   }
 
   async function fetchWeather({ lat, lon, days = CONFIG.DEFAULT_DAYS, ai = true, units = CONFIG.DEFAULT_UNITS, lang = CONFIG.DEFAULT_LANG }) {
-    const endpoint = `${CONFIG.API_BASE}/weather?lat=${lat}&lon=${lon}&days=${days}&ai=${ai}&units=${units}&lang=${lang}`;
-    const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(endpoint)}`;
-    const res = await fetch(proxy, {
-      headers: { Authorization: `Bearer ${CONFIG.API_KEY}` },
-    });
+    const url = `/api/weather?lat=${lat}&lon=${lon}&days=${days}&ai=${ai}&units=${units}&lang=${lang}`;
+    const res = await fetch(url);
 
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
@@ -30,7 +27,6 @@ const WeatherService = (() => {
 
     const data = await res.json();
 
-    // Merge hourly[0] into current for missing fields
     if (data.hourly && data.hourly.length > 0) {
       data.current = { ...data.hourly[0], ...data.current };
     }
