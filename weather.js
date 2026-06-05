@@ -14,8 +14,8 @@ const WeatherService = (() => {
   }
 
   async function fetchWeather({ lat, lon, days = CONFIG.DEFAULT_DAYS, ai = true, units = CONFIG.DEFAULT_UNITS, lang = CONFIG.DEFAULT_LANG }) {
-    const endpoint = `${CONFIG.API_BASE}/weather?lat=${lat}&lon=${lon}&days=${days}&ai=${ai}&units=${units}&lang=${lang}`;
-    const url = `https://corsproxy.io/?${encodeURIComponent(endpoint)}`;
+    const url = `${CONFIG.API_BASE}/weather?lat=${lat}&lon=${lon}&days=${days}&ai=${ai}&units=${units}&lang=${lang}`;
+    
     const res = await fetch(url, {
       headers: { Authorization: `Bearer ${CONFIG.API_KEY}` },
     });
