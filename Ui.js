@@ -103,9 +103,9 @@ const UI = (() => {
     html('humidity',      unit(hum, '%'));
     html('windSpeed',     unit(typeof wind === 'number' ? Math.round(wind) : wind, 'km/h'));
     html('precipitation', unit(precip !== '—' ? precip + '%' : '—', ' chance'));
-    html('cloudCover',    unit(uv !== '—' ? uv : '—', ''));
+    html('cloudCover',    uv !== '—' ? String(uv) : '—');
     html('visibility',    unit(dir !== '—' ? dir + '°' : '—', ''));
-    html('pressure',      unit(gust !== '—' ? Math.round(gust) : '—', 'km/h'));
+    html('pressure',      unit(gust !== '—' ? Math.round(gust) : '—', ' km/h'));
 
     return { hum, wind };
   }
