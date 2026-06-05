@@ -65,8 +65,9 @@ const UI = (() => {
 
   // ── Hero card ───────────────────────────────────────────────────────────────
   function renderHero({ weather, location }) {
-    const now     = new Date();
-    const current = weather.current;
+    const now      = new Date();
+    const timezone = weather.location?.timezone || 'UTC';
+    const current  = weather.current;
     const { name, countryCode, region, lat, lon } = location;
 
     text('cityName', name);
@@ -74,8 +75,9 @@ const UI = (() => {
       `${countryCode}${region ? ' · ' + region : ''} · ${parseFloat(lat).toFixed(2)}°, ${parseFloat(lon).toFixed(2)}°`
     );
     html('timestamp',
-      `${now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })}<br>
-       ${now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`
+      now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short', timeZone: timezone }) +
+      '<br>' +
+      now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: timezone })
     );
 
     const temp      = current.temperature;
